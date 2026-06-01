@@ -85,6 +85,16 @@ pipeline {
                     '''
                 }
             }
+            post {
+                always {
+                    junit 'tests-api/test-results/results.xml'
+                    publishHTML(target: [
+                        reportName: 'API Test Report',
+                        reportDir: 'test-api/playwright-report',
+                        reportFiles: 'index.html'
+                    ])
+                }
+            }
         }
     }
     post {
